@@ -20,7 +20,9 @@ We want to use this model to classify Cifar-10 dataset by using at max 2500 trai
 
 ## 
 
-
+https://link.springer.com/article/10.1007/s11042-019-08453-9
+https://www.kdnuggets.com/2018/09/dropout-convolutional-networks.html
+https://towardsdatascience.com/batch-normalization-and-dropout-in-neural-networks-explained-with-pytorch-47d7a8459bcd
 
 
 
