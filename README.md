@@ -32,7 +32,7 @@ I used data augmentation to overcome overfitting. Data augmentation parameters a
 * horizontal_flip=True
 * fill_mode='nearest'
 
-Though I used data augmentation for the imbalanced data total number of data is half than the other classes. To overcome this I used balanced data generator function which will randomly oversample the imbalanced data.
+Though I used data augmentation for the imbalanced data total number of data is half than the other classes. To overcome this I used balanced data generator function which will randomly oversample the imbalanced data to keep the same ratio for each class in the mini batch. In CNN classification and AutoEncoder CNN classification used this.
 
 
 
@@ -54,7 +54,7 @@ To check overfitting below callback parameters used,
 This cross-validation object is a merge of StratifiedKFold and ShuffleSplit, which returns stratified randomized folds. The folds are made by preserving the percentage of samples for each class. Here 5 fold cross validation is used.
 
 
-## CNN Classification
+## 1. CNN Classification
 ### Architecture
 
 ![CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_architecture.png)
@@ -121,10 +121,12 @@ For Encoder Decoder model I have used modified VGG16 Architecture with some Batc
 
 ![AutoEncoder Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_model_architecture.png)
 
-Augmentated data is fitted in the model. 
+ 
 #### Parameters
 * Loss function = 'mean_squared_error'
 * Optimizer = RMSprop (with learning rate 0.001)
+* Augmentated data is fitted in the model.
+
 ### Learning curve
 ![Autoencoder Accuracy plot](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuray_plot_autoencoder.png)
 ![Autoencoder loss plot](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_autoencoder.png)
@@ -140,7 +142,7 @@ In test data set some of the reconstructed images of the decoder model are as fo
 
 
 
-In the AutoEncoder Pretrained CNN model, same CNN architecture is used. But as inputs autoencoder pretrained layers were used. Here I took pretrained weights upto 11 layers. For the AutoEncoder CNN architecture kept trainable = False for the first 11 layers.
+In this AutoEncoder Pretrained CNN model, after the encoder part same CNN architecture is used as the normal CNN classification. But as inputs autoencoder pretrained layers were used. Here I took pretrained weights upto 11 layers and  kept layer.trainable = False for the first 11 layers.
 ```
 encode = encoder(self.input_image)
 clf = Model(self.input_image,classifier(encode))
