@@ -68,6 +68,19 @@ For first iteration of cross validation accuracy & loss curve are as follows,
 ![accuracy curve CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_CNN_classification_kfold1.png)
 ![loss curve CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_CNN_classification_kfold1.png)
 
+To see accuracy plots for other cross validations,
+[kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_CNN_classification_kfold2.png)
+[kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_CNN_classification_kfold3.png)
+[kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_CNN_classification_kfold4.png)
+[kfold5](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_CNN_classification_kfold5.png)
+
+
+To see loss plots for other cross validations,
+[kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_CNN_classification_kfold2.png)
+[kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_CNN_classification_kfold3.png)
+[kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_CNN_classification_kfold4.png)
+[kfold5](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_CNN_classification_kfold5.png)
+
 Confusion matrix heatmap for first iteration(recall plot),
 ![Heatmap of CNN classification](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold1_heatmap.png)
 
@@ -75,7 +88,7 @@ To see other heatmaps,
 [kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold2_heatmap.png)
 [kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold3_heatmap.png)
 [kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold4_heatmap.png)
-[kfold5](,https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold5_heatmap.png)
+[kfold5](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold5_heatmap.png)
 
 Classification report for first iteration of the cross validation is as follows:
 ```
