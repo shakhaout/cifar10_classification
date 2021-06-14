@@ -56,14 +56,14 @@ def accuracy_curve(model_name=None,hist=None,fold_var=None):
     plt.legend()
     # save plot to file
     if fold_var == None:
-        plt.savefig('./imgs/loss_plot_{}.png'.format(model_name),bbox_inches = 'tight')
+        plt.savefig('./imgs/accuray_plot_{}.png'.format(model_name),bbox_inches = 'tight')
     else:
         plt.savefig('./imgs/accuracy_plot_{}_kfold{}.png'.format(model_name,fold_var),bbox_inches = 'tight')
 #     plt.show()
     
 #######################################################################################################################
 
-def show_org_rcnst_img(orig, dec, num=10):  ## function used for visualizing original and reconstructed images of the autoencoder model
+def show_org_rcnst_img(orig, dec, num=10, show=None):  ## function used for visualizing original and reconstructed images of the autoencoder model
     n = num
     plt.figure(figsize=(20, 4))
 
@@ -83,4 +83,5 @@ def show_org_rcnst_img(orig, dec, num=10):  ## function used for visualizing ori
     plt.figtext(0.5,0.5, "RECONSTRUCTED IMAGES", ha="center", va="top", fontsize=14, color="blue")
     plt.subplots_adjust(hspace = 0.3 )
     ax.figure.savefig('./imgs/autoencoder_org_reconstd_imgs.png',bbox_inches='tight')
-#     plt.show()
+    if show != None:
+        plt.show()
