@@ -283,4 +283,12 @@ python main.py --train TRAIN --autoencoder AUTOENCODER
 ```
 For the first time this command will train the autoencoder model. After finishing the autoencoder model, using the weights of this autoencoder model CNN model will start training. If pretrained autoencoder weight already exists in the checkpoints directory, running above command will train the CNN model and inputs of this CNN model will be the pretrained weights.
 
-
+# Test
+To test run below command:
+```
+python test.py --model_name autoencoder --model_path ./checkpoint/autoencoder_best_wgt.h5 --batch_size 128
+```
+For --model_name  use as follows, 
+AutoEncoder model = autoencoder
+AutoEncoder CNN classification = autoencoder_cls
+CNN classification = cnn
