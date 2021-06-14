@@ -15,14 +15,26 @@ The classes are completely mutually exclusive. There is no overlap between autom
 The model must start with autoencoder(s) (stacking autoencoder is ok) that is connected through its hidden layer to another network of choice, as shown in the figure below:
 ![problem architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/Problem_architecture.png)
 This autoencoder takes an input (image) at node 1 and reconstructs it at its output at node 3. It creates valuable features at its hidden layers (node 2) during this process. it is hypothesized that if node 2 is used as input for the CNN (node 4) then the classification can be improved.
-#### Data:
+
 We want to use this model to classify Cifar-10 dataset by using at max 2500 training images for each of the **bird**, **deer**, and **truck** classes while using 5000 for the other classes. The model should be evaluated by the test set of 10000 images (1000 for each class).
 
-## 
+## Data Preprocessing
+For bird, deer and truck class out of 5000 data randomly selected 2500 data for each class as train data. Train data is splited into Train and Validation set with split size = 0.15. Here I am using the test data of 10000 images (1000 for each class). Data distribution of train and validation set after making the imbalanced dataset as follows:
+![Data Distribution](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/data_distribution.png)
 
-https://link.springer.com/article/10.1007/s11042-019-08453-9
-https://www.kdnuggets.com/2018/09/dropout-convolutional-networks.html
-https://towardsdatascience.com/batch-normalization-and-dropout-in-neural-networks-explained-with-pytorch-47d7a8459bcd
+Data is normalized before feeding to training or testing.
+I used data augmentation to overcome overfitting. Data augmentation parameters are as follows:
+* rotation_range=40
+* width_shift_range=0.2
+* height_shift_range=0.2
+* shear_range=0.2
+* zoom_range=0.2
+* horizontal_flip=True
+* fill_mode='nearest'
+
+Though I used data augmentation for the imbalanced data total number of data is half than the other classes. To overcome this I used balanced data generator function which will randomly oversample the imbalanced data.
+
+
 
 
 
@@ -31,6 +43,8 @@ https://towardsdatascience.com/batch-normalization-and-dropout-in-neural-network
 ![CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_architecture.png)
 
 
+
+In the CNN architecture BatchNormalization is used after each Convolutional layer and after first Dense Layer Dropout with probability 0.4 is used as regularizer. After BatchNormalization layer Relu Aactivation is used.
 
 
 
