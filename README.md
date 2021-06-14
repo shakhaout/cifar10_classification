@@ -36,7 +36,7 @@ Though I used data augmentation for the imbalanced data total number of data is 
 
 
 
-### Parameters
+## Training Parameters
 Below are common parameters used for both CNN and Pretrained Autoencoder CNN model,
 * batch_size = 128
 * epochs = 100
