@@ -115,7 +115,7 @@ weighted avg       0.74      0.73      0.73     10000
 To see the other cross validation confusion matrix see this file, 
 [Classification report CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/CNN_classification_report.txt)
 
-## AutoEncoder
+## 2. AutoEncoder (with data augmentation)
 ### Architecture
 For Encoder Decoder model I have used modified VGG16 Architecture with some BatchNormalization and Dropout layer as regularizer to check overfitting.
 
@@ -135,7 +135,7 @@ For Encoder Decoder model I have used modified VGG16 Architecture with some Batc
 In test data set some of the reconstructed images of the decoder model are as follows:
 ![Decoded image](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_org_reconstd_imgs.png)
 
-## AutoEncoder Pretrained CNN Classification
+## 3. AutoEncoder Pretrained CNN Classification
 ### Architecture
 
 ![AutoEncoder CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_architecture.png)
@@ -202,6 +202,74 @@ weighted avg       0.78      0.76      0.76     10000
 To see the other cross validation confusion matrix see this file, 
 [Classification report AutoEncoder CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/AutoEncoder_classification_report.txt)
 
+
+## 4. AutoEncoder ( with no data augmentation)
+Here same architecture is used as in AutoEncoder(No.2) with data augmentation. Other parameters are also similar to previous autoencoder model just no augmenation technique is adopted while trining the model.
+
+### Learning curve
+![Autoencoder Accuracy plot no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuray_plot_autoencoder_no_augmentation.png)
+![Autoencoder loss plot no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_autoencoder_no_augmentation.png)
+
+Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the test set and the reconstructed images are as follows,
+**Average PSNR:27.825**  
+**Average SSIM: 0.944**
+
+### Reconstructed Image
+In test data set some of the reconstructed images of the decoder model are as follows:
+![Decoded image no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_org_reconstd_imgs_no_aug.png)
+
+## 5. AutoEncoder Pretrained CNN Classification ( Pretrained AutoEncoder of No.4)
+Here model architecture and parameters are similar to  previous AutoEncoder CNN classification model(No.3). But AutoEncoder model is trained with no data augmentation and this pretrained weight is used in this model.
+
+### Learning Curve
+For 5th iteration of cross validation accuracy & loss curve are as follows,
+![accuracy curve AutoEncoder CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold5_noaug.png)
+![loss curve AutoEncoder CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold5_noaug.png)
+
+To see accuracy plots for other cross validations,
+[kfold1](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold1_noaug.png)
+[kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold2_noaug.png)
+[kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold3_noaug.png)
+[kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold4_noaug.png)
+
+
+To see loss plots for other cross validations,
+[kfold1](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold1_noaug.png)
+[kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold2_noaug.png)
+[kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold3_noaug.png)
+[kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold4noaug.png)
+
+Confusion matrix heatmap for 5th iteration(recall plot),
+![Heatmap of AutoEncoder CNN classification](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold5_heatmap_noaug.png)
+
+To see other heatmaps,
+[kfold1](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold1_heatmap_noaug.png)
+[kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold2_heatmap_noaug.png)
+[kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold3_heatmap_noaug.png)
+[kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold5_heatmap_noaug.png)
+
+Classification report for 5th iteration of the cross validation is as follows:
+```
+  Kfold Iteration:5
+              precision    recall  f1-score   support
+
+    airplane       0.86      0.86      0.86      1000
+  automobile       0.89      0.92      0.90      1000
+        bird       0.86      0.68      0.76      1000
+         cat       0.70      0.67      0.69      1000
+        deer       0.82      0.76      0.79      1000
+         dog       0.79      0.76      0.77      1000
+        frog       0.74      0.93      0.83      1000
+       horse       0.86      0.89      0.87      1000
+        ship       0.91      0.89      0.90      1000
+       truck       0.84      0.89      0.87      1000
+
+    accuracy                           0.82     10000
+   macro avg       0.83      0.82      0.82     10000
+weighted avg       0.83      0.82      0.82     10000
+```
+To see the other cross validation confusion matrix see this file, 
+[Classification report AutoEncoder CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/AutoEncoder_classification_report_noaug.txt)
 
 # Train
 To train the CNN model run below command:
