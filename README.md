@@ -47,5 +47,10 @@ Though I used data augmentation for the imbalanced data total number of data is 
 In the CNN architecture BatchNormalization is used after each Convolutional layer and after first Dense Layer Dropout with probability 0.4 is used as regularizer. After BatchNormalization layer Relu Aactivation is used.
 
 
+# Train
+To train the CNN model run below command:
+```
+python main.py --train TRAIN --cnn CNNN
+```
 
 
