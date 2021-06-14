@@ -54,7 +54,8 @@ To check overfitting below callback parameters used,
 This cross-validation object is a merge of StratifiedKFold and ShuffleSplit, which returns stratified randomized folds. The folds are made by preserving the percentage of samples for each class. Here 5 fold cross validation is used.
 
 
-## CNN Architecture
+## CNN Classification
+### Architecture
 
 ![CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_architecture.png)
 
@@ -91,7 +92,8 @@ To see other heatmaps,
 [kfold5](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold5_heatmap.png)
 
 Classification report for first iteration of the cross validation is as follows:
-```
+``
+Kfold Iteration:1`
           precision    recall  f1-score   support
 
     airplane       0.78      0.74      0.76      1000
@@ -112,6 +114,73 @@ weighted avg       0.74      0.73      0.73     10000
 To see the other cross validation confusion matrix see this file, 
 [Classification report CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/CNN_classification_report.txt)
 
+
+## AutoEncoder Pretrained CNN Classification
+### Architecture
+
+![AutoEncoder CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_architecture.png)
+
+
+
+In the AutoEncoder Pretrained CNN model, same CNN architecture is used. But as inputs autoencoder pretrained layers were used. Here I took pretrained weights upto 11 layers. For the AutoEncoder CNN architecture kept trainable = False for the first 11 layers.
+```
+encode = encoder(self.input_image)
+clf = Model(self.input_image,classifier(encode))
+for l1, l2 in zip(clf.layers[0:11], cnn_autoencoder.layers[0:11]):
+   l1.set_weights(l2.get_weights())
+for layer in clf.layers[0:11]:
+   layer.trainable = False
+```
+
+### Learning Curve
+For 5th iteration of cross validation accuracy & loss curve are as follows,
+![accuracy curve AutoEncoder CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold5.png)
+![loss curve AutoEncoder CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold5.png)
+
+To see accuracy plots for other cross validations,
+[kfold1](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold1.png)
+[kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold2.png)
+[kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold3.png)
+[kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_AutoEncoder_classification_kfold4.png)
+
+
+To see loss plots for other cross validations,
+[kfold1](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold1.png)
+[kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold2.png)
+[kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold3.png)
+[kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_AutoEncoder_classification_kfold4.png)
+
+Confusion matrix heatmap for 5th iteration(recall plot),
+![Heatmap of AutoEncoder CNN classification](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold5_heatmap.png)
+
+To see other heatmaps,
+[kfold1](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold1_heatmap.png)
+[kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold2_heatmap.png)
+[kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold3_heatmap.png)
+[kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_kfold4_heatmap.png)
+
+Classification report for 5th iteration of the cross validation is as follows:
+```
+  Kfold Iteration:5
+              precision    recall  f1-score   support
+
+    airplane       0.84      0.79      0.81      1000
+  automobile       0.87      0.89      0.87      1000
+        bird       0.81      0.56      0.67      1000
+         cat       0.72      0.53      0.61      1000
+        deer       0.70      0.73      0.72      1000
+         dog       0.82      0.57      0.67      1000
+        frog       0.56      0.95      0.71      1000
+       horse       0.83      0.82      0.83      1000
+        ship       0.85      0.88      0.87      1000
+       truck       0.78      0.89      0.83      1000
+
+    accuracy                           0.76     10000
+   macro avg       0.78      0.76      0.76     10000
+weighted avg       0.78      0.76      0.76     10000
+```
+To see the other cross validation confusion matrix see this file, 
+[Classification report AutoEncoder CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/AutoEncoder_classification_report.txt)
 
 
 # Train
