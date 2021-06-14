@@ -131,6 +131,11 @@ For Encoder Decoder model I have used modified VGG16 Architecture with some Batc
 ![Autoencoder Accuracy plot](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuray_plot_autoencoder.png)
 ![Autoencoder loss plot](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_autoencoder.png)
 
+Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the test set and the reconstructed images are as follows on Test data of 10000 examples:
+
+**Average PSNR:17.416**
+**Average SSIM: 0.526**
+
 ### Reconstructed Image
 In test data set some of the reconstructed images of the decoder model are as follows:
 ![Decoded image](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_org_reconstd_imgs.png)
@@ -210,7 +215,7 @@ Here same architecture is used as in AutoEncoder(No.2) with data augmentation. O
 ![Autoencoder Accuracy plot no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuray_plot_autoencoder_no_augmentation.png)
 ![Autoencoder loss plot no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_autoencoder_no_augmentation.png)
 
-Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the test set and the reconstructed images are as follows,
+Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the test set and the reconstructed images are as follows on Test data of 10000 examples:
 
 **Average PSNR:27.825**  
 **Average SSIM: 0.944**
