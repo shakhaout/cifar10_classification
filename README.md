@@ -115,6 +115,22 @@ weighted avg       0.74      0.73      0.73     10000
 To see the other cross validation confusion matrix see this file, 
 [Classification report CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/CNN_classification_report.txt)
 
+## AutoEncoder
+### Architecture
+For Encoder Decoder model I have used modified VGG16 Architecture with some BatchNormalization and Dropout layer as regularizer to check overfitting.
+![AutoEncoder Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_model_architecture.png)
+
+Augmentated data is fitted in the model. 
+#### Parameters
+* Loss function = 'mean_squared_error'
+* Optimizer = RMSprop (with learning rate 0.001)
+### Learning curve
+![Autoencoder Accuracy plot](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuray_plot_autoencoder.png)
+![Autoencoder loss plot](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_autoencoder.png)
+
+### Reconstructed Image
+In test data set some of the reconstructed images of the decoder model are as follows:
+![Decoded image](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_org_reconstd_imgs.png)
 
 ## AutoEncoder Pretrained CNN Classification
 ### Architecture
@@ -187,7 +203,7 @@ To see the other cross validation confusion matrix see this file,
 # Train
 To train the CNN model run below command:
 ```
-python main.py --train TRAIN --cnn CNNN
+python main.py --train TRAIN --cnn CNN
 ```
 To train the AutoEncoder CNN model run below command:
 ```
