@@ -280,13 +280,17 @@ To see the other cross validation confusion matrix see this file,
 # Train
 To train the CNN model run below command:
 ```
-python main.py --train TRAIN --cnn CNN
+python main.py --model_name CNN
 ```
 To train the AutoEncoder CNN model run below command:
 ```
-python main.py --train TRAIN --autoencoder AUTOENCODER
+python main.py --model_name AUTOENCODER_CLS
 ```
-For the first time this command will train the autoencoder model. After finishing the autoencoder model, using the weights of this autoencoder model CNN model will start training. If pretrained autoencoder weight already exists in the checkpoints directory, running above command will train the CNN model and inputs of this CNN model will be the pretrained weights.
+To train the Modified AutoEncoder CNN model run below command:
+```
+python main.py --model_name MOD_AUTOENCODER_CLS
+```
+For the first time AutoEncoder CNN and Modified AutoEncoder CNN model will train the autoencoder model. After finished training the autoencoder model, using the weights of this autoencoder model CNN classification model will start training. If pretrained autoencoder weight already exists in the checkpoint directory, above two models will train the CNN classification part only using the pretrained autoencoder weights as input.
 
 # Test
 To test run below command:
