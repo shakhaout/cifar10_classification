@@ -37,9 +37,7 @@ if not os.path.isdir(save_dir):
 img_dir = './imgs/'
 if not os.path.isdir(img_dir):
     os.makedirs(img_dir)
-# weight_dir = './weights/'
-# if not os.path.isdir(weight_dir):
-#     os.makedirs(weight_dir)
+
     
 
 ###########################################################################################################################
@@ -88,7 +86,7 @@ class Classification:
                            epochs = self.epochs,
                            verbose = 1,
                            validation_data = validation_itr,
-                           callbacks = [early_stop, rlr, checkpoint],
+                           callbacks = [early_stop, checkpoint],
                            shuffle =True
                                  )
             loss_curve('autoencoder',  hist)
@@ -98,8 +96,11 @@ class Classification:
             # PSNR & SSIM
             PSNR_SSIM(self.X_test,clf)
             print(clf.summary())
-            model_summary = open(save_dir+'./autoencoder_summary.txt','w') 
-            model_summary.write(clf.summary())
+            m_s= open(save_dir + './autoencoder_summary.txt','w')
+            stringlist = []
+            clf.summary(print_fn=lambda x: stringlist.append(x))
+            model_summary = "\n".join(stringlist)
+            m_s.write(model_summary)
             plot_model(clf, img_dir+'autoencoder_model_architecture.png', show_shapes=True)
 
         else:
@@ -145,11 +146,11 @@ class Classification:
                 ckpt_path = save_dir+'CNN_classification_best_wgt_'+str(fold_var)+".h5"
 
             else:
-                encode = encoder(self.input_image, training=False)
+                encode = encoder(self.input_image) #, training=False
                 clf = Model(self.input_image,classifier(encode))
-                for l1, l2 in zip(clf.layers[0:19], cnn_autoencoder.layers[0:19]):
+                for l1, l2 in zip(clf.layers[0:11], cnn_autoencoder.layers[0:11]):
                     l1.set_weights(l2.get_weights())
-                for layer in clf.layers[0:19]:
+                for layer in clf.layers[0:11]:
                     layer.trainable = False
                 clf.compile(loss = categorical_crossentropy,
                                      optimizer = Adam(lr=self.lr),
@@ -179,37 +180,35 @@ class Classification:
 
             print('history:',hist.history['loss'])
             if cnn_autoencoder == None:
-                results = clf.evaluate(self.X_test, self.Y_test, batch_size=self.batch_size)
-                print('history:',hist.history['loss'])
                 loss_curve('CNN_classification',  hist, fold_var)
                 accuracy_curve('CNN_classification',  hist, fold_var)
-                results = dict(zip(clf.metrics_names,results))
-                with open('CNN_classification_kfold_train_summary.json','w') as fp:
-                    json.dump(results,fp)
                 pred_y = clf.predict(self.X_test)
                 REPORT.write('Kfold Iteration:')
                 REPORT.write(str(fold_var))
                 REPORT.write('\n')
                 rpt = report(self.Y_test,pred_y,'CNN_classification',fold_var)
-                REPORT.write(rpt) 
+                REPORT.write(rpt)
+                  
             else:
-                results = clf.evaluate(self.X_test,self.Y_test, batch_size=self.batch_size)
                 loss_curve('AutoEncoder_classification',  hist, fold_var)
                 accuracy_curve('AutoEncoder_classification',  hist, fold_var)
-                results = dict(zip(clf.metrics_names,results))
-                with open('AutoEncoder_classification_kfold_train_summary.json','w') as fp:
-                    json.dump(results,fp)
                 pred_y = clf.predict(self.X_test)
                 REPORT.write('Kfold Iteration:')
                 REPORT.write(str(fold_var))
                 REPORT.write('\n')
-                REPORT.write(report(self.Y_test,pred_y,'AutoEncoder_classification',fold_var)) 
+                REPORT.write(report(self.Y_test,pred_y,'AutoEncoder_classification',fold_var))
+                
+                 
 
             fold_var += 1
 
         print(clf.summary())
+        stringlist = []
+        clf.summary(print_fn=lambda x: stringlist.append(x))
+        model_summary = "\n".join(stringlist)
         REPORT.write('\n')
-        REPORT.write(clf.summary())
+        REPORT.write(model_summary)
+
         
 #################################################################################################################
 
@@ -217,8 +216,7 @@ if __name__ == "__main__":
     parse = argparse.ArgumentParser()
     parse.add_argument('--train', help='Strat training')
     parse.add_argument('--cnn', help='CNN Classification training')
-    parse.add_argument('--autoencoder', help='AutoEncoder Classification training')
-#     parse.add_argument('--test', dest='test',action='store_true',help='Test mode')
+    parse.add_argument('--autoencoder_cls', help='AutoEncoder Classification training')
     args = parse.parse_args()
 
     if args.train :
@@ -231,17 +229,10 @@ if __name__ == "__main__":
         if args.cnn:
             hist = Train.model_training()
             
-        elif args.autoencoder:
+        elif args.autoencoder_cls:
             encoder_decoder = Train.autoencoder()
             hist = Train.model_training(encoder_decoder)
 
-#     elif args.test :
-#         print('-'*30)
-#         print('Test Mode')
-#         print('-'*30)
-#         if args.model_path :
-#             test(lb=args.lb, ub=args.ub, model_path=args.model_path)
-#         else :
-#             test(lb=args.lb, ub=args.ub)
+
     else :
         print('Wrong Argument')

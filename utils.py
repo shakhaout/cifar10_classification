@@ -115,8 +115,15 @@ def report(Y_test,predictions, model, fold_var):
     plt.figure(figsize=(12,12))
     sns_plot = sns.heatmap(cm, annot=True, xticklabels = list(label_dict.values()), 
                 yticklabels = list(label_dict.values()), fmt=".2f")
-    Title = '{} model Kfold {} heatmap'.format(model,fold_var)
-    sns_plot.set_title(Title)
-    sns_plot.figure.savefig('./imgs/{}_model_kfold{}_heatmap.png'.format(model,fold_var),bbox_inches='tight')
+    
+    if fold_var == None:
+        sns_plot.figure.savefig('./imgs/{}_model_heatmap.png'.format(model),bbox_inches='tight')
+        Title = '{} model heatmap'.format(model)
+        sns_plot.set_title(Title)
+        plt.show()
+    else:
+        Title = '{} model Kfold {} heatmap'.format(model,fold_var)
+        sns_plot.set_title(Title)
+        sns_plot.figure.savefig('./imgs/{}_model_kfold{}_heatmap.png'.format(model,fold_var),bbox_inches='tight')
     return cr
 
