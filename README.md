@@ -118,6 +118,7 @@ To see the other cross validation confusion matrix see this file,
 ## AutoEncoder
 ### Architecture
 For Encoder Decoder model I have used modified VGG16 Architecture with some BatchNormalization and Dropout layer as regularizer to check overfitting.
+
 ![AutoEncoder Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_model_architecture.png)
 
 Augmentated data is fitted in the model. 
