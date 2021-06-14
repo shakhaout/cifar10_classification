@@ -298,6 +298,6 @@ To test run below command:
 python test.py --model_name autoencoder --model_path ./checkpoint/autoencoder_best_wgt.h5 --batch_size 128
 ```
 For --model_name  use as follows, 
-AutoEncoder model = autoencoder
-AutoEncoder CNN classification = autoencoder_cls
-CNN classification = cnn
+* AutoEncoder model = 'autoencoder'
+* AutoEncoder CNN classification = 'autoencoder_cls'
+* CNN classification = 'cnn'
