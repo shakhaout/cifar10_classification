@@ -92,7 +92,7 @@ To see other heatmaps,
 [kfold5](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold5_heatmap.png)
 
 Classification report for first iteration of the cross validation is as follows:
-``
+```
 Kfold Iteration:1`
           precision    recall  f1-score   support
 
@@ -111,6 +111,7 @@ Kfold Iteration:1`
    macro avg       0.74      0.73      0.73     10000
 weighted avg       0.74      0.73      0.73     10000
 ```
+
 To see the other cross validation confusion matrix see this file, 
 [Classification report CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/CNN_classification_report.txt)
 
