@@ -68,10 +68,10 @@ For first iteration of cross validation accuracy & loss curve are as follows,
 ![accuracy curve CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_CNN_classification_kfold1.png)
 ![loss curve CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_CNN_classification_kfold1.png)
 
-Heatmap for first iteration,
+Confusion matrix heatmap for first iteration(recall plot),
 ![Heatmap of CNN classification](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold1_heatmap.png)
 
-Confusion matrix for first iteration of the cross validation is as follows:
+Classification report for first iteration of the cross validation is as follows:
 ```
           precision    recall  f1-score   support
 
@@ -91,7 +91,7 @@ Confusion matrix for first iteration of the cross validation is as follows:
 weighted avg       0.74      0.73      0.73     10000
 ```
 To see the other cross validation confusion matrix see this file, 
-[Confusion matrix CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/CNN_classification_report.txt)
+![Classification report CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/CNN_classification_report.txt)
 
 
 
