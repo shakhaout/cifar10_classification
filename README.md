@@ -72,7 +72,11 @@ Confusion matrix heatmap for first iteration(recall plot),
 ![Heatmap of CNN classification](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold1_heatmap.png)
 
 To see other heatmaps,
-[kfold2, kfold2, kfold3, kfold4, kfold5](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold2_heatmap.png,https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold3_heatmap.png,https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold4_heatmap.png,https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold5_heatmap.png)
+[kfold2](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold2_heatmap.png)
+[kfold3](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold3_heatmap.png)
+[kfold4](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold4_heatmap.png)
+[kfold5](,https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold5_heatmap.png)
+
 Classification report for first iteration of the cross validation is as follows:
 ```
           precision    recall  f1-score   support
