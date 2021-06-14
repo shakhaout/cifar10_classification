@@ -211,6 +211,7 @@ Here same architecture is used as in AutoEncoder(No.2) with data augmentation. O
 ![Autoencoder loss plot no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_autoencoder_no_augmentation.png)
 
 Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the test set and the reconstructed images are as follows,
+
 **Average PSNR:27.825**  
 **Average SSIM: 0.944**
 
