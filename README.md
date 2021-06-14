@@ -61,7 +61,7 @@ To check overfitting below callback parameters used,
 #### Stratified ShuffleSplit cross-validator
 This cross-validation object is a merge of StratifiedKFold and ShuffleSplit, which returns stratified randomized folds. The folds are made by preserving the percentage of samples for each class. Here 5 fold cross validation is used.
 Confusion matrix for one of the cross validation are as follows:
-
+```
           precision    recall  f1-score   support
 
     airplane       0.78      0.74      0.76      1000
@@ -78,9 +78,9 @@ Confusion matrix for one of the cross validation are as follows:
     accuracy                           0.73     10000
    macro avg       0.74      0.73      0.73     10000
 weighted avg       0.74      0.73      0.73     10000
-
+```
 To see the other cross validation confusion matrix see this file, 
-[cm cnn model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/CNN_classification_report.txt)
+[Confusion matrix CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/CNN_classification_report.txt)
 
 # Train
 To train the CNN model run below command:
