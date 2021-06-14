@@ -36,16 +36,8 @@ Though I used data augmentation for the imbalanced data total number of data is 
 
 
 
-
-
-## CNN Architecture
-
-![CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_architecture.png)
-
-
-
-In the CNN architecture BatchNormalization is used after each Convolutional layer and after first Dense Layer Dropout with probability 0.4 is used as regularizer. After BatchNormalization layer Relu Aactivation is used.
 ### Parameters
+Below are common parameters used for both CNN and Pretrained Autoencoder CNN model,
 * batch_size = 128
 * epochs = 100
 * learning rate = 0.001
@@ -60,7 +52,26 @@ To check overfitting below callback parameters used,
 
 #### Stratified ShuffleSplit cross-validator
 This cross-validation object is a merge of StratifiedKFold and ShuffleSplit, which returns stratified randomized folds. The folds are made by preserving the percentage of samples for each class. Here 5 fold cross validation is used.
-Confusion matrix for one of the cross validation are as follows:
+
+
+## CNN Architecture
+
+![CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_architecture.png)
+
+
+
+In the CNN architecture BatchNormalization is used after each Convolutional layer and after first Dense Layer Dropout with probability 0.4 is used as regularizer. After BatchNormalization layer Relu Aactivation is used.
+
+
+### Learning Curve
+For first iteration of cross validation accuracy & loss curve are as follows,
+![accuracy curve CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_CNN_classification_kfold1.png)
+![loss curve CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_CNN_classification_kfold1.png)
+
+Heatmap for first iteration,
+![Heatmap of CNN classification](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_kfold1_heatmap.png)
+
+Confusion matrix for first iteration of the cross validation is as follows:
 ```
           precision    recall  f1-score   support
 
@@ -81,6 +92,8 @@ weighted avg       0.74      0.73      0.73     10000
 ```
 To see the other cross validation confusion matrix see this file, 
 [Confusion matrix CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/CNN_classification_report.txt)
+
+
 
 # Train
 To train the CNN model run below command:
