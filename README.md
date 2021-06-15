@@ -144,7 +144,7 @@ In test data set some of the reconstructed images of the decoder model are as fo
 ## 3. AutoEncoder Pretrained CNN Classification
 ### Architecture
 
-![AutoEncoder CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_architecture.png)
+![AutoEncoder CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_Architecture.png)
 
 
 
