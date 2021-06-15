@@ -318,7 +318,7 @@ Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the 
 **Average SSIM: 0.944**
 
 ### Reconstructed Image
-In test data set some of the reconstructed images of the decoder model are as follows:
+Using the test data set some of the reconstructed images of the autoencoder model are as follows:
 ![Decoded image no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_org_reconstd_imgs_no_aug.png)
 
 ## 7. AutoEncoder Pretrained CNN Classification ( Pretrained AutoEncoder of No.4)
