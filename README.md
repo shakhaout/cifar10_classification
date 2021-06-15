@@ -23,18 +23,6 @@ For bird, deer and truck class out of 5000 data randomly selected 2500 data for 
 ![Data Distribution](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/data_distribution.png)
 
 Data is normalized before feeding to training or testing.
-I used data augmentation to overcome overfitting. Data augmentation parameters are as follows:
-* rotation_range=40
-* width_shift_range=0.2
-* height_shift_range=0.2
-* shear_range=0.2
-* zoom_range=0.2
-* horizontal_flip=True
-* fill_mode='nearest'
-
-Though I used data augmentation for the imbalanced data total number of data is half than the other classes. To overcome this I used balanced data generator function which will randomly oversample the imbalanced data to keep the same ratio for each class in the mini batch. In CNN classification and AutoEncoder CNN classification used this.
-
-
 
 ## Training Parameters
 Below are common parameters used for all models,
@@ -75,18 +63,35 @@ The gist of RMSprop is to:
 * Divide the gradient by the root of this average
 RMSprop optimizer is used during compiling the autoencoder model.
 
-In the CNN architecture BatchNormalization is used after each Convolutional layer and after first Dense Layer Dropout with probability 0.4 is used as regularizer. After BatchNormalization layer Relu Aactivation is used.
 
 
-To check overfitting below callback parameters used,
+To check overfitting I adopted below,
+
+* **Data Augmentation:** I used data augmentation to overcome overfitting. Data augmentation parameters are as follows:
+ * rotation_range=40
+ * width_shift_range=0.2
+ * height_shift_range=0.2
+ * shear_range=0.2
+ * zoom_range=0.2
+ * horizontal_flip=True
+ * fill_mode='nearest'
+
+* **BalancedDataGenerator:** In spite of using data augmentation in overall dataset, for the imbalanced data total number of data is half than the other classes. To overcome this I used balanced data generator function which will randomly oversample the imbalanced data to keep the same ratio for each class in the mini batch. In CNN classification and AutoEncoder CNN classification used this technique.
+
+* **Regularizer:** It is a multiclass classification task and model can overfit in the training data and perform poor in test set. Regularization is a method that controls the model complexity. I have used to 2 types of regularizers:
+  * BatchNormalization
+  * Dropout 
 * Early stopping with patience = 15 and monitor = 'val_loss'. If validation loss didn't improve within 15 epochs the model stop training.
-* ReduceLROnPlateau: Reduce learning rate when a metric has stopped improving.
+* **ReduceLROnPlateau:** It reduces learning rate when a metric has stopped improving.
   * parameters used: patience=10,monitor="val_loss",factor=0.3, min_lr=0.0001, verbose=1,cooldown=1
   * This callback monitors "val_loss" and if no improvement is seen for 10 epochs, the learning rate is reduced by factor 0.3
+
 
 #### Stratified ShuffleSplit cross-validator
 This cross-validation object is a merge of StratifiedKFold and ShuffleSplit, which returns stratified randomized folds. The folds are made by preserving the percentage of samples for each class. Here 5 fold cross validation is used.
 
+# Model Comparison
+Here I have trained one **CNN Classification** model and compared this model with various types of **AutoEncoder CNN Classification** models.
 
 ## 1. CNN Classification
 ### Architecture
