@@ -357,7 +357,7 @@ Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the 
 Using the test data set some of the reconstructed images of the autoencoder model are as follows:
 ![Decoded image no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_org_reconstd_imgs_no_augment.png)
 
-## 7. AutoEncoder Pretrained CNN Classification ( Pretrained AutoEncoder of No.4)
+## 7. AutoEncoder Pretrained CNN Classification ( Pretrained AutoEncoder of No.6)
 Here model architecture and parameters are similar to  previous AutoEncoder CNN classification model(No.3). But AutoEncoder model is trained with no data augmentation and this pretrained weight is used in this model.
 
 ### Learning Curve
