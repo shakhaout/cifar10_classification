@@ -37,21 +37,28 @@ Though I used data augmentation for the imbalanced data total number of data is 
 
 
 ## Training Parameters
-Below are common parameters used for all CNN classification and Pretrained Autoencoder CNN classificaton models,
+Below are common parameters used for all models,
 * batch_size = 128
 * epochs = 100
 * learning rate = 0.001
+* validation split = 0.15
+
+In both CNN and AutoEncoder CNN classification models used below parameters,
 * loss function = categorical_crossentropy
 * optimizer = Adam
+* Activation of outout layer = Softmax
 
 #### CategoricalCrossentropy
 Used this loss function as our problem is a multiclass classification task. Loss is calculated as follows,
- ![categoricalcrossentropylos](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/Screenshot%202021-06-15%20at%2021-39-11%20Categorical%20crossentropy%20loss%20function%20Peltarion%20Platform.png)
+ ![categoricalcrossentropylos](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/categoricalcrossentropy.png)
  
  #### Adam
- Adam optimization is a stochastic gradient descent method that is based on adaptive estimation of first-order and second-order moments.
-
+Adam optimization is a stochastic gradient descent method that is based on adaptive estimation of first-order and second-order moments.
 According to Kingma et al., 2014, the method is "computationally efficient, has little memory requirement, invariant to diagonal rescaling of gradients, and is well suited for problems that are large in terms of data/parameters".
+
+#### Softmax
+Softmax converts a vector of values to a probability distribution. The elements of the output vector are in range (0, 1) and sum to 1. Each vector is handled independently. The axis argument sets which axis of the input the function is applied along. Softmax is often used as the activation for the last layer of a classification network because the result could be interpreted as a probability distribution.
+![Softmax](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/softmax.png)
 
 
 To check overfitting below callback parameters used,
