@@ -345,6 +345,8 @@ Classification report is as follows:
 weighted avg       0.56      0.49      0.46     10000
 ```
 
+Here I have used AutoEncoder pretrained weights of the whole encoder part and feed the weights in a simplified CNN model. This model performs worst of all.
+
 
 ## 6. AutoEncoder ( with no data augmentation)
 Here same architecture is used as in AutoEncoder(No.2) with data augmentation. Other parameters are also similar to previous autoencoder model just no augmenation technique is adopted while trining the model.
@@ -361,6 +363,8 @@ Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the 
 ### Reconstructed Image
 Using the test data set some of the reconstructed images of the autoencoder model are as follows:
 ![Decoded image no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_org_reconstd_imgs_no_augment.png)
+
+Here, during training the AutoEncoder model I didn't use data augmentation. We can see that the AutoEncoder model trained well and performing best in the test set.
 
 ## 7. AutoEncoder Pretrained CNN Classification ( Pretrained AutoEncoder of No.6)
 Here model architecture and parameters are similar to  previous AutoEncoder CNN classification model(No.3). But AutoEncoder model is trained with no data augmentation and this pretrained weight is used in this model.
@@ -415,6 +419,13 @@ weighted avg       0.83      0.82      0.82     10000
 To see the other cross validation confusion matrix see this file, 
 [Classification report AutoEncoder CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/AutoEncoder_classification_report_noaug.txt)
 
+This model used pretrained weights of model No.6 ( AutoEncoder with no data augmentation). But this CNN model used augmented data while training. As the Encoder part extracted features well, this CNN Classification model performs best of all.
+
+# Conclusion
+* Model No.7 performs best even far better than the normal CNN classification model. As the Encoder part extracts features well and these valuable features used as the pretrained weights, this model learned better.
+* These model can be further developed by working more in the Network architecture.
+
+
 # Requirements
 To install necessary packages run below,
 ```
@@ -451,3 +462,7 @@ For --model_name  use as follows,
 * AutoEncoder model = 'autoencoder'
 * AutoEncoder CNN classification = 'autoencoder_cls'
 * CNN classification = 'cnn'
+
+
+Saved weights of the models can be found here,
+[Model Saved Weights](https://drive.google.com/drive/folders/1SLvesH6EevOQHr69ocPSsthPkulRhh6W?usp=sharing)
