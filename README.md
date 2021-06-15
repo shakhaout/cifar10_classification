@@ -37,12 +37,22 @@ Though I used data augmentation for the imbalanced data total number of data is 
 
 
 ## Training Parameters
-Below are common parameters used for both CNN and Pretrained Autoencoder CNN model,
+Below are common parameters used for all CNN classification and Pretrained Autoencoder CNN classificaton models,
 * batch_size = 128
 * epochs = 100
 * learning rate = 0.001
 * loss function = categorical_crossentropy
 * optimizer = Adam
+
+#### CategoricalCrossentropy
+Used this loss function as our problem is a multiclass classification task. Loss is calculated as follows,
+ ![categoricalcrossentropylos](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/Screenshot%202021-06-15%20at%2021-39-11%20Categorical%20crossentropy%20loss%20function%20Peltarion%20Platform.png)
+ 
+ #### Adam
+ Adam optimization is a stochastic gradient descent method that is based on adaptive estimation of first-order and second-order moments.
+
+According to Kingma et al., 2014, the method is "computationally efficient, has little memory requirement, invariant to diagonal rescaling of gradients, and is well suited for problems that are large in terms of data/parameters".
+
 
 To check overfitting below callback parameters used,
 * Early stopping with patience = 15 and monitor = 'val_loss'. If validation loss didn't improve within 15 epochs the model stop training.
