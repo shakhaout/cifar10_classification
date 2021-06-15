@@ -375,7 +375,7 @@ To see the other cross validation confusion matrix see this file,
 [Classification report AutoEncoder CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/AutoEncoder_classification_report_noaug.txt)
 
 # Train
-To train the CNN model run below command:
+To train the AutoEncoder CNN classification model run below command:
 ```
 python main.py --model_name AUTOENCODER_CLS --val_split 0.2 --batch_size 64 --epochs 150 --lr 0.001 --patience 10
 ```
