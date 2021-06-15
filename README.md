@@ -374,6 +374,13 @@ weighted avg       0.83      0.82      0.82     10000
 To see the other cross validation confusion matrix see this file, 
 [Classification report AutoEncoder CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/AutoEncoder_classification_report_noaug.txt)
 
+# Requirements
+To install necessary packages run below,
+```
+pip install -r requirements.txt
+```
+
+
 # Train
 To train the AutoEncoder CNN classification model run below command:
 ```
