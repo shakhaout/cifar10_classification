@@ -463,6 +463,6 @@ For --model_name  use as follows,
 * AutoEncoder CNN classification = 'autoencoder_cls'
 * CNN classification = 'cnn'
 
-
+## Weights
 Saved weights of the models can be found here,
 [Model Saved Weights](https://drive.google.com/drive/folders/1SLvesH6EevOQHr69ocPSsthPkulRhh6W?usp=sharing)
