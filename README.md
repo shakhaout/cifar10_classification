@@ -68,13 +68,13 @@ RMSprop optimizer is used during compiling the autoencoder model.
 To check overfitting I adopted below,
 
 * **Data Augmentation:** I used data augmentation to overcome overfitting. Data augmentation parameters are as follows:
- * rotation_range=40
- * width_shift_range=0.2
- * height_shift_range=0.2
- * shear_range=0.2
- * zoom_range=0.2
- * horizontal_flip=True
- * fill_mode='nearest'
+  * rotation_range=40
+  * width_shift_range=0.2
+  * height_shift_range=0.2
+  * shear_range=0.2
+  * zoom_range=0.2
+  * horizontal_flip=True
+  * fill_mode='nearest'
 
 * **BalancedDataGenerator:** In spite of using data augmentation in overall dataset, for the imbalanced data total number of data is half than the other classes. To overcome this I used balanced data generator function which will randomly oversample the imbalanced data to keep the same ratio for each class in the mini batch. In CNN classification and AutoEncoder CNN classification used this technique.
 
