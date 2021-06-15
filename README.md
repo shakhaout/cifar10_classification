@@ -261,7 +261,7 @@ weighted avg       0.64      0.60      0.59     10000
 ### Architecture
 
 
-![AutoEncoder Modified CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/Modified_AutoEncoder_classification_model_architecture.png)
+![AutoEncoder Modified CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/Modified_AutoEncoder_classification_model_Architecture.png)
 
 
 In this AutoEncoder Pretrained CNN model, after the encoder part modified and simplified CNN architecture is used. But as inputs autoencoder pretrained layers were used. Here I took pretrained weights upto 19 layers(whole encoder part) and  during training the autoencoder cnn classification model freezed the layers of the encoder part.
