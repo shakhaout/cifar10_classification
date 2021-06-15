@@ -246,6 +246,7 @@ weighted avg       0.78      0.76      0.76     10000
 To see the other cross validation confusion matrix see this file, 
 [Classification report AutoEncoder CNN model](https://github.com/shakhaout/cifar10_classification/blob/main/checkpoints/AutoEncoder_classification_report.txt)
 
+Here instead of using the whole encoder part as feature extractor, I have used first 7 layers of the encoder part. This model performs slightly better than the CNN model(model 1)
 
 ## 4. AutoEncoder Pretrained CNN Classification
 ### Architecture
