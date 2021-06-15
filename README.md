@@ -47,8 +47,8 @@ Below are common parameters used for both CNN and Pretrained Autoencoder CNN mod
 To check overfitting below callback parameters used,
 * Early stopping with patience = 15 and monitor = 'val_loss'. If validation loss didn't improve within 15 epochs the model stop training.
 * ReduceLROnPlateau: Reduce learning rate when a metric has stopped improving.
- * parameters used: patience=10,monitor="val_loss",factor=0.3, min_lr=0.0001, verbose=1,cooldown=1
- * This callback monitors "val_loss" and if no improvement is seen for 10 epochs, the learning rate is reduced by factor 0.3
+  * parameters used: patience=10,monitor="val_loss",factor=0.3, min_lr=0.0001, verbose=1,cooldown=1
+  * This callback monitors "val_loss" and if no improvement is seen for 10 epochs, the learning rate is reduced by factor 0.3
 
 #### Stratified ShuffleSplit cross-validator
 This cross-validation object is a merge of StratifiedKFold and ShuffleSplit, which returns stratified randomized folds. The folds are made by preserving the percentage of samples for each class. Here 5 fold cross validation is used.
