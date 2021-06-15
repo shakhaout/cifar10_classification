@@ -9,7 +9,7 @@ from vis import show_org_rcnst_img
 parse = argparse.ArgumentParser()
 parse.add_argument('--model_name', help='Input the Model name as autoencoder, autoencoder_cls, cnn')
 parse.add_argument('--model_path', help='Input the saved weight path')
-parse.add_argument('--batch_size', help='Input the mini batch size')
+parse.add_argument('--batch_size', default= 128, type =int, help='Input the mini batch size')
 args = parse.parse_args()
 
 x_train, y_train, X_test, Y_test = imbalanced_dataset()

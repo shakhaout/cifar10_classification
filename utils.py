@@ -59,8 +59,6 @@ def imbalanced_dataset(data= cifar10.load_data(), imbl_size=2500,val_split=0.15)
     x_test = x_test.astype('float32')
     x_test = x_test/255.0
     
-#     plot_data_distribution(y_train,y_test)
-    
     # One Hot Encoding
     y_test = to_categorical(y_test)
     

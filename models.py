@@ -9,7 +9,6 @@ def encoder(input_image): #,**kwargs
     x = BatchNormalization(name='block1_BN1')(x)
     x = Conv2D(64, (3, 3), activation='relu', padding='same', name='block1_conv2')(x)
     x = BatchNormalization(name='block1_BN2')(x)
-    # x= Dropout(0.3, name='block1_dropout')(x)
     x = MaxPooling2D((2, 2),  name='block1_pool')(x)
     x= Dropout(0.3, name='block1_dropout')(x)
 
@@ -18,7 +17,6 @@ def encoder(input_image): #,**kwargs
     x = BatchNormalization(name='block2_BN1')(x)
     x = Conv2D(128, (3, 3), activation='relu', padding='same', name='block2_conv2')(x)
     x = BatchNormalization(name='block2_BN2')(x)
-    # x= Dropout(0.3, name='block2_dropout')(x)
     x = MaxPooling2D((2, 2),  name='block2_pool')(x) 
     x= Dropout(0.3, name='block2_dropout')(x)
 
@@ -27,7 +25,6 @@ def encoder(input_image): #,**kwargs
     x = BatchNormalization(name='block3_BN1')(x)
     x = Conv2D(256, (3, 3), activation='relu', padding='same', name='block3_conv2')(x)
     x = BatchNormalization(name='block3_BN2')(x)
-    # x= Dropout(0.3, name='block3_dropout')(x)
     x = Conv2D(256, (3, 3), activation='relu', padding='same', name='block3_conv3')(x)
     encoded = BatchNormalization(name='block3_BN3')(x)
 
@@ -70,7 +67,6 @@ def classifier(inputs):
     
     # Block 7
     x = Conv2D(64, (3, 3), padding='same', name='block7_conv1')(inputs)
-    # x = Dropout(0.3, name='block7_dropout1')(x)
     x = BatchNormalization(name='block7_BN1')(x)
     x = Activation('relu', name='block7_activation1')(x)
     x = MaxPooling2D((2, 2),  name='block7_pool1')(x) 
@@ -78,7 +74,6 @@ def classifier(inputs):
     
     # Block 8
     x = Conv2D(64, (3, 3), padding='same', name='block8_conv1')(x)
-    # x = Dropout(0.4, name='block8_dropout1')(x)
     x = BatchNormalization(name='block8_BN1')(x)
     x = Activation('relu', name='block8_activation1')(x)
     x = MaxPooling2D((2,2), name='block8_pool1')(x)
@@ -90,4 +85,15 @@ def classifier(inputs):
     
     return out
 
-    
+###################################################################################################################
+
+## Modified AutoEncoder CNN model
+
+def EnCNN_cls(inputs):
+    x = Flatten(name='block8_flatten')(inputs)
+    x = Dense(512, activation='relu', name='block8_dense1')(x)
+    x = Dropout(0.4, name='block8_dropout2')(x)
+    x = Dense(64, activation='relu', name='block8_dense2')(x)
+    out = Dense(10, activation='softmax', name='block8_dense3')(x)
+
+    return out

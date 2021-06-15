@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from vis import plot_data_distribution, loss_curve, accuracy_curve, show_org_rcnst_img
 from utils import imbalanced_dataset, BalancedDataGenerator, PSNR_SSIM, report
-from models import encoder, decoder, classifier
+from models import encoder, decoder, classifier, EnCNN_cls
 
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -44,8 +44,8 @@ if not os.path.isdir(img_dir):
 
 
 class Classification:
-    def __init__(self, x_train, y_train, X_test, Y_test, val_split= 0.15, batch_size=128, epochs=100,lr=0.001,
-                 patience=15, input_image = Input(shape=(32,32,3))):
+    def __init__(self, x_train, y_train, X_test, Y_test, val_split, batch_size, epochs,lr,
+                 patience, input_image = Input(shape=(32,32,3))):
         self.x_train = x_train
         self.y_train = y_train
         self.X_test = X_test
@@ -108,7 +108,7 @@ class Classification:
 
         return clf
     
-    def model_training(self,cnn_autoencoder=None):
+    def model_training(self,model_name=None,pretrained = None):
 
         fold_var = 1
         datagen = ImageDataGenerator(
@@ -119,10 +119,12 @@ class Classification:
                     zoom_range=0.2,
                     horizontal_flip=True,
                     fill_mode='nearest')
-        if cnn_autoencoder == None:
+        if model_name == 'CNN':
             REPORT = open(save_dir+'CNN_classification_report.txt','w')
-        else:
+        elif model_name == 'AUTOENCODER_CLS':
             REPORT = open(save_dir+'AutoEncoder_classification_report.txt','w')
+        elif model_name == 'MOD_AUTOENCODER_CLS':
+            REPORT = open(save_dir+'Modified_AutoEncoder_classification_report.txt','w')
         #Stratified ShuffleSplit cross-validator
         sss = StratifiedShuffleSplit(n_splits=5, test_size=self.val_split, random_state=1)
 
@@ -135,7 +137,7 @@ class Classification:
             # ONE HOT ENCODING
             Y_train = to_categorical(Y_train)
             Y_val = to_categorical(Y_val)
-            if cnn_autoencoder == None:
+            if model_name == 'CNN':
                 # CREATE NEW MODEL
                 clf = Model(self.input_image,classifier(self.input_image))
                 # COMPILE NEW MODEL
@@ -145,10 +147,10 @@ class Classification:
                 plot_model(clf, img_dir+'CNN_classification_model_architecture.png', show_shapes=True)
                 ckpt_path = save_dir+'CNN_classification_best_wgt_'+str(fold_var)+".h5"
 
-            else:
-                encode = encoder(self.input_image) #, training=False
+            elif model_name == 'AUTOENCODER_CLS':
+                encode = encoder(self.input_image) 
                 clf = Model(self.input_image,classifier(encode))
-                for l1, l2 in zip(clf.layers[0:11], cnn_autoencoder.layers[0:11]):
+                for l1, l2 in zip(clf.layers[0:11], pretrained.layers[0:11]):
                     l1.set_weights(l2.get_weights())
                 for layer in clf.layers[0:11]:
                     layer.trainable = False
@@ -157,6 +159,19 @@ class Classification:
                                      metrics = ['accuracy'])
                 plot_model(clf, img_dir+'AutoEncoder_classification_model_architecture.png', show_shapes=True)
                 ckpt_path = save_dir+'AutoEncoder_classification_best_wgt_'+str(fold_var)+".h5"
+
+            elif model_name == 'MOD_AUTOENCODER_CLS':
+                encode = encoder(self.input_image) 
+                clf = Model(self.input_image,EnCNN_cls(encode))
+                for l1, l2 in zip(clf.layers[0:19], pretrained.layers[0:19]):
+                    l1.set_weights(l2.get_weights())
+                for layer in clf.layers[0:19]:
+                    layer.trainable = False
+                clf.compile(loss = categorical_crossentropy,
+                                     optimizer = Adam(lr=self.lr),
+                                     metrics = ['accuracy'])
+                plot_model(clf, img_dir+'Modified_AutoEncoder_classification_model_architecture.png', show_shapes=True)
+                ckpt_path = save_dir+'Modified_AutoEncoder_classification_best_wgt_'+str(fold_var)+".h5"
 
             # Model Callbacks
             steps = int(X_train.shape[0]/self.batch_size)
@@ -178,8 +193,7 @@ class Classification:
                                  )
 
 
-            print('history:',hist.history['loss'])
-            if cnn_autoencoder == None:
+            if model_name == 'CNN':
                 loss_curve('CNN_classification',  hist, fold_var)
                 accuracy_curve('CNN_classification',  hist, fold_var)
                 pred_y = clf.predict(self.X_test)
@@ -189,7 +203,7 @@ class Classification:
                 rpt = report(self.Y_test,pred_y,'CNN_classification',fold_var)
                 REPORT.write(rpt)
                   
-            else:
+            elif model_name == 'AUTOENCODER_CLS':
                 loss_curve('AutoEncoder_classification',  hist, fold_var)
                 accuracy_curve('AutoEncoder_classification',  hist, fold_var)
                 pred_y = clf.predict(self.X_test)
@@ -197,7 +211,15 @@ class Classification:
                 REPORT.write(str(fold_var))
                 REPORT.write('\n')
                 REPORT.write(report(self.Y_test,pred_y,'AutoEncoder_classification',fold_var))
-                
+
+            elif model_name == 'MOD_AUTOENCODER_CLS':
+                loss_curve('Modified_AutoEncoder_classification',  hist, fold_var)
+                accuracy_curve('Modified_AutoEncoder_classification',  hist, fold_var)
+                pred_y = clf.predict(self.X_test)
+                REPORT.write('Kfold Iteration:')
+                REPORT.write(str(fold_var))
+                REPORT.write('\n')
+                REPORT.write(report(self.Y_test,pred_y,'Modified_AutoEncoder_classification',fold_var))
                  
 
             fold_var += 1
@@ -214,25 +236,37 @@ class Classification:
 
 if __name__ == "__main__":
     parse = argparse.ArgumentParser()
-    parse.add_argument('--train', help='Strat training')
-    parse.add_argument('--cnn', help='CNN Classification training')
-    parse.add_argument('--autoencoder_cls', help='AutoEncoder Classification training')
+    parse.add_argument('--model_name', help='Input the Model Name as: CNN, AUTOENCODER_CLS, MOD_AUTOENCODER_CLS')
+    parse.add_argument('--val_split', default=0.15, type = float, help='Input the split size of train validation set')
+    parse.add_argument('--batch_size', default=128, type =int, help='Input the mini batch size')
+    parse.add_argument('--epochs', default=100, type=int, help='Input the number of epochs to train')
+    parse.add_argument('--lr', default=0.001, type= float, help='Input the Learning rate')
+    parse.add_argument('--patience', default=15, type=int, help='Input the early stopping patience limit')
     args = parse.parse_args()
 
-    if args.train :
-        x_train, y_train, X_test, Y_test = imbalanced_dataset()
+    x_train, y_train, X_test, Y_test = imbalanced_dataset()
 
-        Train = Classification(x_train=x_train,
-                             y_train=y_train,
-                             X_test=X_test,
-                             Y_test=Y_test)
-        if args.cnn:
-            hist = Train.model_training()
-            
-        elif args.autoencoder_cls:
-            encoder_decoder = Train.autoencoder()
-            hist = Train.model_training(encoder_decoder)
+    Train = Classification(x_train=x_train,
+                            y_train=y_train,
+                            X_test=X_test,
+                            Y_test=Y_test,
+                            val_split=args.val_split, 
+                            batch_size=args.batch_size, 
+                            epochs=args.epochs,
+                            lr=args.lr,
+                            patience=args.patience)
+    if args.model_name == 'CNN':
+        hist = Train.model_training(args.model_name)
+        
+    elif args.model_name == 'AUTOENCODER_CLS':
+        encoder_decoder = Train.autoencoder()
+        hist = Train.model_training(args.model_name, encoder_decoder)
+
+    elif args.model_name == 'MOD_AUTOENCODER_CLS':
+        encoder_decoder = Train.autoencoder()
+        hist = Train.model_training(args.model_name, encoder_decoder)
+
+    else:
+        print('Wrong Argument, Input the Model Name as: "CNN", "AUTOENCODER_CLS" or "MOD_AUTOENCODER_CLS"! ')
 
 
-    else :
-        print('Wrong Argument')
