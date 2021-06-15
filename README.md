@@ -177,8 +177,8 @@ Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the 
 In test data set some of the reconstructed images of the decoder model are as follows:
 ![Decoded image](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_org_reconstd_imgs.png)
 
+Here we can see that the AutoEncoder model is performing bad. As we are using data augmentation technique the Encoder part is seeing different image every time so it can not extract features well.
 
-Here
 ## 3. AutoEncoder Pretrained CNN Classification
 ### Architecture
 
