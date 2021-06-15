@@ -134,6 +134,7 @@ For Encoder Decoder model I have used modified VGG16 Architecture with some Batc
 Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the test set and the reconstructed images are as follows on Test data of 10000 examples:
 
 **Average PSNR:17.416**
+
 **Average SSIM: 0.526**
 
 ### Reconstructed Image
