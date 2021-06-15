@@ -383,6 +383,7 @@ python main.py --model_name AUTOENCODER_CLS --val_split 0.2 --batch_size 64 --ep
   * AutoEncoder Classification = "AUTOENCODER_CLS"
   * CNN Classification = "CNN"
   * Modified AutoEncoder Classification = "MOD_AUTOENCODER_CLS"
+
 Below arguments are set to defaults, if not given,
 * --val_split = 0.15
 * --batch_size = 128
