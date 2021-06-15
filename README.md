@@ -213,7 +213,7 @@ To see the other cross validation confusion matrix see this file,
 ### Architecture
 
 
-![AutoEncoder CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_architecture_freeze_whole_encoder.png)
+![AutoEncoder CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_architecture_freeze_whole_Encoder.png)
 
 
 In this AutoEncoder Pretrained CNN model, after the encoder part same CNN architecture is used as the normal CNN classification. But as inputs autoencoder pretrained layers were used. Here I took pretrained weights upto 19 layers(whole encoder part) and  during training the autoencoder cnn classification model freezed the layers of the encoder part.
