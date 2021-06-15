@@ -296,6 +296,8 @@ Classification report is as follows:
 weighted avg       0.64      0.60      0.59     10000
 ```
 
+Here I have used the whole encoder part as feature extractor and using their pretraied weights trained the CNN model. This model performs worse than the Normal CNN model(model1)
+
 ## 5. AutoEncoder Pretrained CNN Classification(Modified CNN Architecture)
 ### Architecture
 
