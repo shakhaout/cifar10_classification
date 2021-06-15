@@ -148,7 +148,7 @@ In test data set some of the reconstructed images of the decoder model are as fo
 
 
 
-In this AutoEncoder Pretrained CNN model, after the encoder part same CNN architecture is used as the normal CNN classification. But as inputs autoencoder pretrained layers were used. Here I took pretrained weights upto 11 layers and  kept layer.trainable = False for the first 11 layers.
+In this AutoEncoder Pretrained CNN model, after the encoder part same CNN architecture is used as the normal CNN classification. But as inputs autoencoder pretrained layers were used. Here I took pretrained weights upto 11 layers and during training the autoencoder cnn classification model freezed the first 11 layers of the encoder part.
 ```
 encode = encoder(self.input_image)
 clf = Model(self.input_image,classifier(encode))
@@ -212,7 +212,7 @@ To see the other cross validation confusion matrix see this file,
 ## 4. AutoEncoder Pretrained CNN Classification
 ### Architecture
 
-Here CNN architecture is similar to No. 3
+
 ![AutoEncoder CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/AutoEncoder_classification_model_architecture_freeze_whole_encoder.png)
 
 
@@ -257,8 +257,55 @@ Classification report is as follows:
 weighted avg       0.64      0.60      0.59     10000
 ```
 
+## 5. AutoEncoder Pretrained CNN Classification(Modified CNN Architecture)
+### Architecture
 
-## 5. AutoEncoder ( with no data augmentation)
+
+![AutoEncoder Modified CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/Modified_AutoEncoder_classification_model_architecture.png)
+
+
+In this AutoEncoder Pretrained CNN model, after the encoder part modified and simplified CNN architecture is used. But as inputs autoencoder pretrained layers were used. Here I took pretrained weights upto 19 layers(whole encoder part) and  during training the autoencoder cnn classification model freezed the layers of the encoder part.
+```
+encode = encoder(self.input_image)
+clf = Model(self.input_image,classifier(encode))
+for l1, l2 in zip(clf.layers[0:19], cnn_autoencoder.layers[0:19]):
+   l1.set_weights(l2.get_weights())
+for layer in clf.layers[0:19]:
+   layer.trainable = False
+```
+
+### Learning Curve
+Accuracy & loss curves are as follows,
+![accuracy curve AutoEncoder Modified CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/accuracy_plot_Modified_AutoEncoder_classification_kfold1.png)
+![loss curve AutoEncoder Modified CNN](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/loss_plot_Modified_AutoEncoder_classification_kfold1.png)
+
+
+Confusion matrix heatmap (recall plot),
+![Heatmap of AutoEncoder Modified CNN classification](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/Modified_AutoEncoder_classification_model_kfold1_heatmap.png)
+
+Classification report is as follows:
+```
+  Kfold Iteration:1
+              precision    recall  f1-score   support
+
+    airplane       0.58      0.67      0.62      1000
+  automobile       0.70      0.57      0.63      1000
+        bird       0.60      0.20      0.30      1000
+         cat       0.44      0.21      0.28      1000
+        deer       0.44      0.27      0.34      1000
+         dog       0.66      0.12      0.20      1000
+        frog       0.31      0.93      0.46      1000
+       horse       0.64      0.47      0.54      1000
+        ship       0.73      0.65      0.69      1000
+       truck       0.45      0.81      0.58      1000
+
+    accuracy                           0.49     10000
+   macro avg       0.56      0.49      0.46     10000
+weighted avg       0.56      0.49      0.46     10000
+```
+
+
+## 6. AutoEncoder ( with no data augmentation)
 Here same architecture is used as in AutoEncoder(No.2) with data augmentation. Other parameters are also similar to previous autoencoder model just no augmenation technique is adopted while trining the model.
 
 ### Learning curve
@@ -274,7 +321,7 @@ Peak signal to noise ratio (PSNR) and structural index similarity (SSIM) of the 
 In test data set some of the reconstructed images of the decoder model are as follows:
 ![Decoded image no augmentation](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/autoencoder_org_reconstd_imgs_no_aug.png)
 
-## 6. AutoEncoder Pretrained CNN Classification ( Pretrained AutoEncoder of No.4)
+## 7. AutoEncoder Pretrained CNN Classification ( Pretrained AutoEncoder of No.4)
 Here model architecture and parameters are similar to  previous AutoEncoder CNN classification model(No.3). But AutoEncoder model is trained with no data augmentation and this pretrained weight is used in this model.
 
 ### Learning Curve
