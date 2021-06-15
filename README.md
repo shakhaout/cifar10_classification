@@ -60,6 +60,23 @@ According to Kingma et al., 2014, the method is "computationally efficient, has 
 Softmax converts a vector of values to a probability distribution. The elements of the output vector are in range (0, 1) and sum to 1. Each vector is handled independently. The axis argument sets which axis of the input the function is applied along. Softmax is often used as the activation for the last layer of a classification network because the result could be interpreted as a probability distribution.
 ![Softmax](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/softmax.png)
 
+#### Relu
+Applies the rectified linear unit activation function. With default values, this returns the standard ReLU activation: max(x, 0), the element-wise maximum of 0 and the input tensor.
+In the Encoder Decoder model **relu** activation is used with each convolutional layer, except the output layer of the decoder model. In the classification models **relu** activation is used after each BatchNormalization layer and also with the Dense layers.
+
+#### Sigmoid
+Sigmoid activation function, sigmoid(x) = 1 / (1 + exp(-x)).
+Applies the sigmoid activation function. For small values (<-5), sigmoid returns a value close to zero, and for large values (>5) the result of the function gets close to 1. Sigmoid is equivalent to a 2-element Softmax, where the second element is assumed to be zero. The sigmoid function always returns a value between 0 and 1.
+Sigmoid activation function is used in the output layer of the decoder model. Sigmoid forces the output to the range [0, 1]. In this case, it's not because we want to interpret the output as a probability, rather it's done to force the output to be interpreted as pixel intensity of a grey scale image.
+
+#### RMSprop
+The gist of RMSprop is to:
+* Maintain a moving (discounted) average of the square of gradients
+* Divide the gradient by the root of this average
+RMSprop optimizer is used during compiling the autoencoder model.
+
+In the CNN architecture BatchNormalization is used after each Convolutional layer and after first Dense Layer Dropout with probability 0.4 is used as regularizer. After BatchNormalization layer Relu Aactivation is used.
+
 
 To check overfitting below callback parameters used,
 * Early stopping with patience = 15 and monitor = 'val_loss'. If validation loss didn't improve within 15 epochs the model stop training.
@@ -76,9 +93,6 @@ This cross-validation object is a merge of StratifiedKFold and ShuffleSplit, whi
 
 ![CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_architecture.png)
 
-
-
-In the CNN architecture BatchNormalization is used after each Convolutional layer and after first Dense Layer Dropout with probability 0.4 is used as regularizer. After BatchNormalization layer Relu Aactivation is used.
 
 
 ### Learning Curve
