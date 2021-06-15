@@ -377,23 +377,27 @@ To see the other cross validation confusion matrix see this file,
 # Train
 To train the CNN model run below command:
 ```
-python main.py --model_name CNN
+python main.py --model_name AUTOENCODER_CLS --val_split 0.2 --batch_size 64 --epochs 150 --lr 0.001 --patience 10
 ```
-To train the AutoEncoder CNN model run below command:
-```
-python main.py --model_name AUTOENCODER_CLS
-```
-To train the Modified AutoEncoder CNN model run below command:
-```
-python main.py --model_name MOD_AUTOENCODER_CLS
-```
-For the first time AutoEncoder CNN and Modified AutoEncoder CNN model will train the autoencoder model. After finished training the autoencoder model, using the weights of this autoencoder model CNN classification model will start training. If pretrained autoencoder weight already exists in the checkpoint directory, above two models will train the CNN classification part only using the pretrained autoencoder weights as input.
+* Argument --model_name will be as follows:
+  * AutoEncoder Classification = "AUTOENCODER_CLS"
+  * CNN Classification = "CNN"
+  * Modified AutoEncoder Classification = "MOD_AUTOENCODER_CLS"
+Below arguments are set to defaults, if not given,
+* --val_split = 0.15
+* --batch_size = 128
+* --epochs = 100
+* --lr = 0.001
+* --patience = 15
+
+For the first time AutoEncoder CNN and Modified AutoEncoder CNN model will train the autoencoder model first. After finished training the autoencoder model, using the weights of this autoencoder model AutoEncoder CNN classification model will start training. If pretrained autoencoder weight already exists in the checkpoint directory, above two models will train the CNN classification part only using the pretrained autoencoder weights as input.
 
 # Test
 To test run below command:
 ```
 python test.py --model_name autoencoder --model_path ./checkpoint/autoencoder_best_wgt.h5 --batch_size 128
 ```
+If --batch_size is not given default batch size = 128
 For --model_name  use as follows, 
 * AutoEncoder model = 'autoencoder'
 * AutoEncoder CNN classification = 'autoencoder_cls'
