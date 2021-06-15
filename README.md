@@ -98,7 +98,7 @@ Here I have trained one **CNN Classification** model and compared this model wit
 
 ![CNN Architecture](https://github.com/shakhaout/cifar10_classification/blob/main/imgs/CNN_classification_model_architecture.png)
 
-
+Here Data Augmentation with BalancedDataGenerator is used while training the model.
 
 ### Learning Curve
 For first iteration of cross validation accuracy & loss curve are as follows,
